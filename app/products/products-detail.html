@@ -1,0 +1,42 @@
+<div id="banner" class="banner">
+  <img  src="images/jewelry-box-2093019_1280.jpg" alt="Third slide" class="img-responsive">
+  <div class="car-desc">
+    <h1>The treasure of your life</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+  </div>
+</div>
+<div class="container mainwrapper">
+<div ng-repeat="item in items">
+<h1>{{item.name}}</h1>
+	<div class="col-md-6">
+	<img ng-src="images/{{mainImage}}" class="img-responsive">
+	<div class="row img-row">
+	<div ng-repeat="image in item.images | limitTo:4">
+		<div class="col-md-3">
+		<img ng-src="images/{{image.name}}" class="img-thumbnail" width="150" height="120" ng-click="changeImage(image)">
+		</div>
+	</div>
+	</div>
+	</div>
+	<div class="col-md-6">
+	
+	
+		
+		<h4>Price: {{item.price | currency}}</h4>
+		<p>{{item.description}}</p>
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+
+   <input type="hidden" name="cmd" value="_cart">
+  <input type="hidden" name="business" value="lonelyagal-facilitator@gmail.com">
+  <input type="hidden" name="item_name" value="{{item.name}}">
+  <input type="hidden" name="item_number" value="{{item.id}}">
+  <input type="hidden" name="amount" value="{{item.price}}">
+  
+  <input type="submit" name="submit" value="Buy"
+    class="btn btn-primary"
+   >
+
+</form>
+		</div>
+	</div>
+</div>
