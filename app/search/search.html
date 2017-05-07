@@ -1,0 +1,20 @@
+<!-- The Modal -->
+<div id="myModal" class="modal1">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" ng-click="hideMe()">&times;</span>
+        <div class="list-group" >
+           <div ng-repeat="result in resultObject">
+              <a href="#!/products/{{result.id}}" class="list-group-item list-group-item-action flex-column align-items-start" ng-click="hideMe()">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{result.name}}</h5>
+                 </div>
+                <p class="mb-1">{{result.description}}</p>
+
+              </a>
+           </div>
+            <div ng-hide="resultObject.length">No products found. Try using different name.</div>
+        </div>
+    </div>
+</div>

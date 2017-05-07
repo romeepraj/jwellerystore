@@ -11,6 +11,9 @@ h1, h2,h3,h4,h5{
 a{
   color:#991904;
 }
+.modal{
+ background:url(images/map-overlay.png) repeat;   
+}
 .btn-primary{
   background-color:#991904;
   border-color:#991904;
@@ -153,4 +156,63 @@ footer a{
 }
 .product-desc{
   padding:0px 20px 30px 20px;
+}
+.search-wrapper
+{
+    display:inline;
+}
+#searchbox{
+    height: 35px;
+    margin-top: 8px;
+    padding-left: 5px;
+}
+.search-btn{
+    border-radius:0px;
+}
+/* The Modal (background) */
+.modal1 {
+  
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.list-group {
+   
+    margin-top: 30px;
+   
+}
+.srchicon
+{
+    color:#991904;
+    margin-left: -18px;
 }

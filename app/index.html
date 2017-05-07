@@ -9,15 +9,15 @@
   <title>Jwellery Store</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/font-awesome.min.css">
    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app.css">
    <link rel="stylesheet" href="carousel.css">
 
 </head>
-<body>
+<body ng-controller ="SrchCtrl">
 <div class="navbar-wrapper">
-      <div class="container">
+      <div class="container"  >
 
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">
@@ -38,17 +38,27 @@
                 <li><a href="#!/contact" ng-class="getClass('/contact')">Contact</a></li>
                 
               </ul>
+                <div class="search-wrapper">
+                   
+                   <input type="text" placeholder="Search products..." ng-model="searchbox" id="searchbox" ng-keypress ="search()" ng-keydown="search()"><i class="fa fa-search srchicon" aria-hidden="true" ng-click ="search()"></i>
+                  
+                   
+                </div>
             </div>
           </div>
         </nav>
-
+         
+       
       </div>
     </div>
+   
  
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+
+    <search-result result-object= "results" hide-me = "hideMe()"  ng-show="showMe"></search-result>
 
   <div ng-view></div>
 
@@ -72,19 +82,21 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
-      <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+  <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+
   
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoFyLKF9AmaL2Rbr-Z4YCLnwvxvQoMFB8&callback=initMap"
-  type="text/javascript"></script>
+  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoFyLKF9AmaL2Rbr-Z4YCLnwvxvQoMFB8&callback=initMap"
+  type="text/javascript"></script>-->
  
   <script src="app.js"></script>
   <script src="main/main.js"></script>
-    <script src="contact/contact.js"></script>
+  <script src="contact/contact.js"></script>
   <script src="about/about.js"></script>
-   <script src="products/products.js"></script>
- 
+  <script src="products/products.js"></script>
+ <script src="search/search.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

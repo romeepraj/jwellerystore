@@ -8,6 +8,7 @@
 <div class="container mainwrapper">
 <div ng-repeat="item in items">
 <h1>{{item.name}}</h1>
+<div class="row">
 	<div class="col-md-6">
 	<img ng-src="images/{{mainImage}}" class="img-responsive">
 	<div class="row img-row">
@@ -32,11 +33,27 @@
   <input type="hidden" name="item_number" value="{{item.id}}">
   <input type="hidden" name="amount" value="{{item.price}}">
   
-  <input type="submit" name="submit" value="Buy"
-    class="btn btn-primary"
-   >
+  <input type="submit" name="submit" value="Buy"class="btn btn-primary">
 
 </form>
 		</div>
+</div>
+<div class="row">
+ <h3>Write Review</h3>   
+ <form name="myForm">
+    <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" ng-model="fullname" name="fullname" id="fullname" required class="form-control" />
+     </div>
+      <div class="form-group">
+     <label for="review">Review </label>
+         <textarea ng-model="review" id="review" minlength="100" required class="form-control" name="review"></textarea>
+          <div ng-messages="myForm.review.$error" role="alert" >
+              <div ng-message="minlength" class="alert alert-danger">Review should be at least 100 characters long.</div>
+         </div>
+     </div>
+     <input type="submit" value="Send" class="btn btn-primary">
+  </form>
+</div>
 	</div>
 </div>
