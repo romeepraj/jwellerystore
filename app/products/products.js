@@ -13,20 +13,28 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
 	  })
 }])
 
-.controller('ProductsCtrl', ['$scope', '$http', 'categoryTree','$filter', function($scope, $http, categoryTree, $filter) {
+.controller('ProductsCtrl', ['$scope', '$http', 'categoryTree','$filter', 'productList', function($scope, $http, categoryTree, $filter, productList) {
     $scope.selectedCategory = '';
     //default sort
     $scope.sort = 'new';
      //get categories from category tree service 
     $scope.categories = categoryTree.categories;
+
+   
     $http.get('/json/products.json').then(function(response){
 		$scope.products = response.data;
         $scope.max =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.max(a,b)});
         $scope.min =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.min(a,b)});
     });
     
-   
-     
+    //function to close the category filter selection
+     $scope.closeFilter = function(){
+        $scope.selectedCategory = '';
+        $http.get('/json/products.json').then(function(response){
+            $scope.products = response.data;
+        });
+        $scope.catName = null;
+     }
   
     
     

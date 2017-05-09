@@ -223,3 +223,6 @@ footer a{
     float:right;
     margin:20px;
 }
+.filter-close{
+  cursor: pointer;
+}
