@@ -5,20 +5,52 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
   </div>
 </div>
- <div class="container mainwrapper">
-	 <h1>Products</h1>
-	 <div class="row">
-      <div ng-repeat="product in products">
-  		  <div class="col-md-4 text-center">
-          <div class="product">
-    			  <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive"></a>
-            <div class="product-desc">
-          <h4>{{product.name}}</h4>
-          <p class="price">{{product.price | currency}}</p>
-          <a class="btn btn-primary" href="#!/products/{{product.id}}">View Details</a>
-  			</div>
+<div class="container mainwrapper">
+    <h1>Products</h1>
+    <div class="row">
+       <div class="col-md-3">
+         <h4>Filter By</h4>
+           <h5 ng-hide="catName == null">Selected Category:{{ catName }}</h5>
+           <ul class="list-group">
+              <li class="list-group-item" ng-repeat="category in categories" ng-click="sortProductCat( category.id )">{{category.name}}</li>
+           </ul>
+          <div class="well">
+            <h4>Price</h4>
+          
+            <input type="range" name="range" ng-model="priceValue" min="{{min}}"  max="{{max}}" ng-change="sortPriceFilter(priceValue)">
+            <div class="row"><div class="col-xs-4">{{min | currency}}</div><div class="col-xs-4 text-center">{{priceValue | currency}}</div><div class="col-xs-4 text-right">{{max | currency}}</div></div>  
+               
+          </div>
+           
+      </div>  
+      <div class="col-md-9">
+          <div class="row">
+              <div class="sort">
+                  Sort By:
+                  <select ng-model="sort" class="" ng-change="sortProduct(sort)">
+                      <option value="">Select</option>
+                      <option value="new">Newest</option>
+                      <option value="low">Price Low to High</option>
+                      <option value="high">Price High to Low</option>
+
+                 </select>
+              </div>
+         </div>
+          <div class="row">
+          <div ng-repeat="product in products">
+              <div class="col-md-4 text-center">
+                  <div class="product">
+                          <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive"></a>
+                            <div class="product-desc">
+                                <h5>{{product.name}}</h5>
+                                <p class="price">{{product.price | currency}}</p>
+                                <a class="btn btn-primary" href="#!/products/{{product.id}}">View Details</a>
+                            </div>
+                  </div>
+            </div>
+              </div>
         </div>
-        </div>
+          <div ng-hide="products.length">No products found.</div>
      </div>
-	 </div>
- </div>
+    </div>
+</div>

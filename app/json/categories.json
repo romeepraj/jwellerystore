@@ -1,0 +1,26 @@
+[
+	{
+		"id":1,
+		"name": "Earring",
+        "parentid":""
+		
+	},
+    {
+		"id":2,
+		"name": "Necklace",
+        "parentid":""
+		
+	},
+    {
+		"id":3,
+		"name": "Rings",
+        "parentid":""
+		
+	},
+    {
+		"id":4,
+		"name": "Bracelet",
+        "parentid":""
+		
+	}
+]

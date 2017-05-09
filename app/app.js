@@ -8,6 +8,7 @@ angular.module('myApp', [
   'myApp.products',
   'myApp.contact',
   'myApp.search',
+  'myApp.service',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -21,11 +22,14 @@ directive("searchResult", function(){
         scope:{
             resultObject : "=",
             hideMe: "&"
-        }
+        },
+        transclude:true
         
     }
 }).
-controller('SrchCtrl', ['$scope', '$location','$http', '$filter', function($scope, $location, $http, $filter){
+
+controller('SrchCtrl', ['$scope', '$location','$http', '$filter', 'categoryTree', function($scope, $location, $http, $filter, categoryTree){
+   
    $scope.showMe = false;
    $scope.search = function(){
        if ($scope.searchbox) {

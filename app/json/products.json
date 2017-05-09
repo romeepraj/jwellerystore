@@ -11,12 +11,13 @@
 			{
 				"name":"jewelry-420018_1280.jpg"
 			}
-		]
+		],
+        "catid":2
 	},
 	{
 		"id":2,
 		"name": "Blue Pendant",
-		"price": 110,
+		"price": 15,
 		"description": "Homero albucius officiis quo ei, volutpat salutandi per ad. Ei duo alii tractatos gloriatur. Quod liber ea per, vitae accusam te eum, ea eam dolores fastidii reformidans. Harum prompta probatus sed at. Per at eius dicant facilis, magna prompta voluptatibus duo ei. Pri iudico cetero euismod ne, eu viris doctus mei, nam quis amet intellegam eu. Munere nemore tacimates quo eu, assum munere eu mea.",
 		"images":[
 			{
@@ -25,12 +26,13 @@
 			{
 				"name":"jewelry-420018_1280.jpg"
 			}
-		]
+		],
+        "catid":2
 	},
 	{
 		"id":3,
 		"name": "Beautiful necklace set",
-		"price": 110,
+		"price": 5,
 		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
 		"images":[
 			{
@@ -39,13 +41,14 @@
 			{
 				"name":"woman-1028398_1280.jpg"
 			}
-		]
+		],
+        "catid":2
 	},
 	
 	{
 		"id":4,
 		"name": "White Pearl Earring",
-		"price": 110,
+		"price": 25,
 		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
 		"images":[
 			{
@@ -64,12 +67,13 @@
 				"name":"jewelry-1523668_1280.jpg"
 			}
 
-		]
+		],
+        "catid":1
 	},
 	{
 		"id":5,
 		"name": "Heavy necklace",
-		"price": 110,
+		"price": 22,
 		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
 		"images":[
 			{
@@ -78,12 +82,13 @@
 			{
 				"name":"jewelry-1523668_1280.jpg"
 			}
-		]
+		],
+        "catid":2
 	},
 	{
 		"id":6,
 		"name": "Marquee diamond earring",
-		"price": 110,
+		"price": 12,
 		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
 		"images":[
 			{
@@ -92,12 +97,13 @@
 			{
 				"name":"jewelry-1523668_1280.jpg"
 			}
-		]
+		],
+        "catid":1
 	},
 	{
 		"id":7,
 		"name": "Silver plated necklace",
-		"price": 110,
+		"price": 19,
 		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
 		"images":[
 			{
@@ -106,6 +112,37 @@
 			{
 				"name":"necklace-518268_1280.jpg"
 			}
-		]
+		],
+        "catid":2
+	},
+    {
+		"id":8,
+		"name": "Rose Gold Ring",
+		"price": 19,
+		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
+		"images":[
+			{
+				"name":"ring-260892_1280.jpg"
+			},
+			{
+				"name":"ring-260892_1280.jpg"
+			}
+		],
+        "catid":3
+	},
+     {
+		"id":9,
+		"name": "Stone Ring",
+		"price": 30,
+		"description": "Lorem ipsum dolor sit amet, ex per nihil interesset. Pri id petentium moderatius. Sed tantas graeci ad, mei no tollit moderatius, prima lorem in mei. An unum facer cum.",
+		"images":[
+			{
+				"name":"jewellery-1175526_1280.jpg"
+			},
+			{
+				"name":"jewellery-1175526_1280.jpg"
+			}
+		],
+        "catid":3
 	}
 ]

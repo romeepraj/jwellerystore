@@ -211,8 +211,15 @@ footer a{
     margin-top: 30px;
    
 }
+.list-group-item{
+    cursor: pointer;
+}
 .srchicon
 {
     color:#991904;
     margin-left: -18px;
+}
+.sort{
+    float:right;
+    margin:20px;
 }
