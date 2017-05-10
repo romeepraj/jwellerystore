@@ -13,32 +13,29 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
 	  })
 }])
 
-.controller('ProductsCtrl', ['$scope', '$http', 'categoryTree','$filter', 'productList', function($scope, $http, categoryTree, $filter, productList) {
+.controller('ProductsCtrl', ['$scope', '$http', 'productList', 'categoryTree', '$filter', '$timeout', function($scope, $http, productList, categoryTree, $filter, $timeout) {
+     //defaults
     $scope.selectedCategory = '';
-    //default sort
     $scope.sort = 'new';
-     //get categories from category tree service 
+    //get cattree from service
     $scope.categories = categoryTree.categories;
+    //get categories from category tree service 
 
-   
-    $http.get('/json/products.json').then(function(response){
-		$scope.products = response.data;
+    productList.getProducts().then(function(response){
+        $scope.products = response.data;
         $scope.max =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.max(a,b)});
         $scope.min =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.min(a,b)});
-    });
-    
+       
+    })
     //function to close the category filter selection
-     $scope.closeFilter = function(){
+    $scope.closeFilter = function(){
         $scope.selectedCategory = '';
-        $http.get('/json/products.json').then(function(response){
+        productList.getProducts().then(function(response){
             $scope.products = response.data;
         });
         $scope.catName = null;
      }
   
-    
-    
-    
     //sort by function
     $scope.sortProduct = function(sort){
         if(sort == 'low'){
@@ -54,7 +51,7 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
     $scope.sortPriceFilter = function(value){
         //if category filter is selected
         if($scope.selectedCategory) {
-            $http.get('/json/products.json').then(function(response){
+            productList.getProducts().then(function(response){
                   $scope.products = $filter('filter')(response.data.filter(function(product){
                         if(product.catid == $scope.selectedCategory && product.price >= $scope.min && product.price <= value){
                             return product;
@@ -62,7 +59,7 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
                   }));
             });
         } else {
-           $http.get('/json/products.json').then(function(response){
+           productList.getProducts().then(function(response){
               $scope.products = $filter('filter')(response.data.filter(function(product){
                     if(product.price >= $scope.min && product.price <= value){
                         
@@ -79,22 +76,17 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
     $scope.sortProductCat = function(sort){
 
         $scope.selectedCategory = sort;
-
         $scope.catName =  categoryTree.getCatName($scope.selectedCategory)[0].name;
-        $http.get('/json/products.json').then(function(response){
+        productList.getProducts().then(function(response){
             $scope.products = $filter('filter')(response.data, { catid: sort });
         });
     }
-
-    console.log($scope.selectedCategory);
-   
 }])
-.controller('ProductsDetailCtrl', ['$scope', '$http', '$routeParams', '$filter', '$log', function($scope, $http, $routeParams, $filter, $log) {
+.controller('ProductsDetailCtrl', ['$scope', '$http', '$routeParams', '$filter', 'productList', function($scope, $http, $routeParams, $filter, $productList) {
    
 	var productId = $routeParams.productId;
-    $http.get('/json/products.json').then(function(response){
-		
-		 $scope.items = $filter('filter')(response.data, { id: productId });
+    productList.getProducts().then(function(response){
+		$scope.items = $filter('filter')(response.data, { id: productId });
 		 $scope.mainImage = $scope.items[0].images[0]['name'];
 		 $scope.changeImage = function(image){
              $scope.mainImage = image.name;
