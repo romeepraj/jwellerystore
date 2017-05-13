@@ -2,7 +2,7 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
+  'ui.router',
   'myApp.main',
   'myApp.about',
   'myApp.products',
@@ -11,11 +11,33 @@ angular.module('myApp', [
   'myApp.service',
   'myApp.version'
 ]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+/*config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
   $routeProvider.otherwise({redirectTo: '/main'});
-}]).
-directive("searchResult", function(){
+}]).*/
+config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+     $urlRouterProvider.otherwise('/');
+      $stateProvider
+      .state('app',{
+        url: '/',
+        views:{
+          'content':{
+            templateUrl: 'main/main.html'
+          },
+          'header':
+          {
+            templateUrl:'main/header.html',
+             controller:'SrchCtrl'
+          },
+           'footer':
+          {
+            templateUrl:'main/footer.html'
+          }
+        }
+        })
+}])
+
+.directive("searchResult", function(){
     return {
         templateUrl:'search/search.html',
         replace:true,
@@ -28,15 +50,17 @@ directive("searchResult", function(){
     }
 }).
 
-controller('SrchCtrl', ['$scope', '$location','$http', '$filter', 'categoryTree', function($scope, $location, $http, $filter, categoryTree){
-   
+controller('SrchCtrl', ['$scope', '$filter', 'productList', function($scope, $filter, productList){
+  
    $scope.showMe = false;
    $scope.search = function(){
+ 
        if ($scope.searchbox) {
            $scope.showMe = true;
-            $http.get('/json/products.json').then(function(response){
-                $scope.results = $filter('filter')(response.data, { name: $scope.searchbox});
-           })
+            productList.getProducts(function(response){
+                $scope.results = $filter('filter')(response, { name: $scope.searchbox});
+               
+            })
        }
     
    }

@@ -11,6 +11,7 @@
        <div class="col-md-3">
          <h4>Filter By</h4>
            <h5 ng-hide="catName == null"> Selected Category: {{ catName }} <span class="filter-close" ng-click="closeFilter()">   <i class="fa fa-times-circle" aria-hidden="true"></i></span></h5>
+
            <ul class="list-group">
               <li class="list-group-item" ng-repeat="category in categories" ng-click="sortProductCat( category.id )">{{category.name}}</li>
            </ul>
@@ -25,6 +26,14 @@
       </div>  
       <div class="col-md-9">
           <div class="row">
+          <div class="col-xs-6">
+            <div class="glview">
+            <a ui-sref=".list"><i class="fa fa-list" aria-hidden="true"></i></a>
+            <a ui-sref=".grid"><i class="fa fa-th" aria-hidden="true"></i></a>
+            <!--<a ui-sref=".detail({ productId: 1 })">View Details</a>-->
+            </div>
+            </div>
+            <div class="col-xs-6">
               <div class="sort">
                   Sort By:
                   <select ng-model="sort" class="" ng-change="sortProduct(sort)">
@@ -35,22 +44,13 @@
 
                  </select>
               </div>
+              </div>
          </div>
           <div class="row">
-          <div ng-repeat="product in products">
-              <div class="col-md-4 text-center">
-                  <div class="product">
-                          <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive"></a>
-                            <div class="product-desc">
-                                <h5>{{product.name}}</h5>
-                                <p class="price">{{product.price | currency}}</p>
-                                <a class="btn btn-primary" href="#!/products/{{product.id}}">View Details</a>
-                            </div>
-                  </div>
-            </div>
+              <div ng-repeat="product in products">
+                <div ui-view="layout"></div>
               </div>
+              <div ng-hide="products.length">No products found.</div>
         </div>
-          <div ng-hide="products.length">No products found.</div>
-     </div>
     </div>
 </div>

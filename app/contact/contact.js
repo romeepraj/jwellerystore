@@ -1,12 +1,22 @@
 'use strict';
 
-angular.module('myApp.contact', ['ngRoute', 'uiGmapgoogle-maps'])
+angular.module('myApp.contact', ['ui.router', 'uiGmapgoogle-maps'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/contact', {
-    templateUrl: 'contact/contact.html',
-    controller: 'ContactCtrl'
-  });
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    
+     
+      $stateProvider  
+     .state('app.contact', {
+        url: 'contact',
+        views: {
+            'content@': {
+                templateUrl: 'contact/contact.html',
+                controller: 'ContactCtrl'
+                
+            }
+          }
+        })
+ 
 }])
 
 .controller('ContactCtrl', ['$scope','$http', function($scope, $http) {

@@ -1,0 +1,14 @@
+
+  <div class="col-md-4 text-center">
+    <div class="product">
+      <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive"></a>
+        <div class="product-desc">
+            <h5>{{product.name}}</h5>
+            <p class="price">{{product.price | currency}}</p>
+            <a class="btn btn-primary" href="#!/products/{{product.id}}">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-hide="products.length">No products found.</div>

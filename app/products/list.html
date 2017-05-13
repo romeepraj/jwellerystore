@@ -1,0 +1,22 @@
+
+ <div class="row list-row">
+  <div class="col-md-2 text-center">
+  
+      <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive list-img"></a>
+       
+    
+    </div>
+    <div class="col-md-10">
+    	 <div class="product-desc">
+            <h5>{{product.name}}</h5>
+            <p class="price">{{product.price | currency}}    <!--<a class="btn btn-primary"  <a ui-sref=".detail({ productId: {{ product.id }} })">View Details</a>-->
+            	 <a class="btn btn-primary" href="#!/products/{{product.id}}">View Details</a>
+
+            </p>
+           
+        </div>
+    </div>
+  </div>
+</div>
+
+<div ng-hide="products.length">No products found.</div>

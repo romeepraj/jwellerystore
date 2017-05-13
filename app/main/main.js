@@ -1,13 +1,8 @@
 'use strict';
 
-angular.module('myApp.main', ['ngRoute','ngMessages'])
+angular.module('myApp.main', ['ngMessages'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/main', {
-    templateUrl: 'main/main.html',
-    controller: 'MainCtrl'
-  });
-}])
+
 
 .controller('MainCtrl', ['$scope','$http','$location', function($scope, $http, $location) {
  $scope.getClass = function (path) {

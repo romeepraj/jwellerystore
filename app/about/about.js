@@ -1,14 +1,17 @@
 'use strict';
 
-angular.module('myApp.about', ['ngRoute'])
+angular.module('myApp.about', ['ui.router'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/about', {
-    templateUrl: 'about/about.html',
-    controller: 'AboutCtrl'
-  });
-}])
-
-.controller('AboutCtrl', [function() {
-
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+    .state('app.about', {
+        url: 'about',
+        views: {
+            'content@': {
+                templateUrl: 'about/about.html',
+                
+            }
+          }
+        })
+ 
 }]);

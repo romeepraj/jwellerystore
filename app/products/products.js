@@ -1,37 +1,115 @@
 'use strict';
 
-angular.module('myApp.products', ['ngRoute', 'ngMessages'])
+angular.module('myApp.products', ['ui.router', 'ngMessages'])
 
-.config(['$routeProvider', function($routeProvider) {
-	  $routeProvider.when('/products', {
-	    templateUrl: 'products/products.html',
-	    controller: 'ProductsCtrl'
-	  }).
-	  when('/products/:productId', {
-	    templateUrl: 'products/products-detail.html',
-	    controller: 'ProductsDetailCtrl'
-	  })
+/*.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+      /*$routeProvider.when('/products', {
+        //templateUrl: 'products/products.html',
+        controller: 'ProductsCtrl'
+        action:"products.grid"
+      }).
+      when('/products/:productId', {
+        templateUrl: 'products/products-detail.html',
+        controller: 'ProductsDetailCtrl'
+      })*/
+
+
+
+   // $urlRouterProvider.otherwise('/products');
+  /*  $stateProvider
+        .state('products', {
+            url:'/products',
+            views:{
+               'list':{
+                  templateUrl: 'products/products.html',
+                  controller: 'ProductsCtrl'
+                } 
+            }
+           
+        })
+        
+ 
+   
+}])*/
+
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/products', '/products/grid');
+    $stateProvider
+    .state('app.products', {
+        url: 'products',
+        
+        views: {
+            'content@': {
+                templateUrl: 'products/products.html',
+                 controller:'ProductsCtrl'
+                
+            }
+          }
+    })  
+    .state('app.products.list', {
+        url: '/list',
+       
+        views: {
+            'layout@app.products': {
+                templateUrl: 'products/list.html',
+                controller:'ProductsCtrl'
+                      
+            }
+        }
+ 
+    })
+    .state('app.products.grid', {
+        url: '/grid',
+       
+        views: {
+            'layout@app.products': {
+                templateUrl: 'products/grid.html',
+                controller:'ProductsCtrl'
+                      
+            }
+        }
+ 
+    })
+     .state('app.products.detail', {
+        url: '/:productId',
+      
+       views: {
+            'content@': {
+                templateUrl: 'products/products-detail.html',
+                controller:'ProductsDetailCtrl'
+                      
+            }
+        }
+ 
+    });
+
+    
+     
+ 
 }])
 
-.controller('ProductsCtrl', ['$scope', '$http', 'productList', 'categoryTree', '$filter', '$timeout', function($scope, $http, productList, categoryTree, $filter, $timeout) {
-     //defaults
-    $scope.selectedCategory = '';
-    $scope.sort = 'new';
-    //get cattree from service
-    $scope.categories = categoryTree.categories;
-    //get categories from category tree service 
+.controller('ProductsCtrl', ['$scope', 'productList', 'categoryTree', '$filter',  function($scope, productList, categoryTree, $filter) {
+  //defaults
+  $scope.selectedCategory = '';
+  $scope.sort = 'new';
+  //get cattree from service we have to pass callback function to make the request ashynchronous
+  categoryTree.getCategories(function(response){
+      $scope.categories = response;
+  })
 
-    productList.getProducts().then(function(response){
-        $scope.products = response.data;
-        $scope.max =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.max(a,b)});
-        $scope.min =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.min(a,b)});
-       
-    })
+  
+  productList.getProducts(function(response){
+    $scope.products = response;
+    $scope.max =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.max(a,b)});
+    $scope.min =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.min(a,b)});
+   
+  })
+   
     //function to close the category filter selection
     $scope.closeFilter = function(){
         $scope.selectedCategory = '';
-        productList.getProducts().then(function(response){
-            $scope.products = response.data;
+        productList.getProducts(function(response){
+            $scope.products = response;
         });
         $scope.catName = null;
      }
@@ -51,21 +129,20 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
     $scope.sortPriceFilter = function(value){
         //if category filter is selected
         if($scope.selectedCategory) {
-            productList.getProducts().then(function(response){
-                  $scope.products = $filter('filter')(response.data.filter(function(product){
+            productList.getProducts(function(response){
+                  $scope.products = $filter('filter')(response.filter(function(product){
                         if(product.catid == $scope.selectedCategory && product.price >= $scope.min && product.price <= value){
                             return product;
                         }
                   }));
             });
         } else {
-           productList.getProducts().then(function(response){
-              $scope.products = $filter('filter')(response.data.filter(function(product){
+           productList.getProducts(function(response){
+              $scope.products = $filter('filter')(response.filter(function(product){
                     if(product.price >= $scope.min && product.price <= value){
-                        
                         return product;  
                     }
-              }))
+              }));
            
             });  
         }
@@ -76,20 +153,23 @@ angular.module('myApp.products', ['ngRoute', 'ngMessages'])
     $scope.sortProductCat = function(sort){
 
         $scope.selectedCategory = sort;
-        $scope.catName =  categoryTree.getCatName($scope.selectedCategory)[0].name;
-        productList.getProducts().then(function(response){
-            $scope.products = $filter('filter')(response.data, { catid: sort });
+        categoryTree.getCatName($scope.selectedCategory, function(response){
+            $scope.catName =response;
         });
+        productList.filterProducts('catid', sort, function(response){
+          $scope.products = response;
+        });
+       
     }
 }])
-.controller('ProductsDetailCtrl', ['$scope', '$http', '$routeParams', '$filter', 'productList', function($scope, $http, $routeParams, $filter, $productList) {
+.controller('ProductsDetailCtrl', ['$scope', '$stateParams', '$filter', 'productList', function($scope, $stateParams, $filter, productList) {
    
-	var productId = $routeParams.productId;
-    productList.getProducts().then(function(response){
-		$scope.items = $filter('filter')(response.data, { id: productId });
-		 $scope.mainImage = $scope.items[0].images[0]['name'];
-		 $scope.changeImage = function(image){
+	var productId = $stateParams.productId;
+    productList.filterProducts('id', productId, function(response){
+        $scope.items = response;
+        $scope.mainImage = $scope.items[0].images[0]['name'];
+		    $scope.changeImage = function(image){
              $scope.mainImage = image.name;
-	    }
-    })
+	      }
+    });
 }]);

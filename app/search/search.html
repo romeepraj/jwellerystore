@@ -1,12 +1,13 @@
 <!-- The Modal -->
-<div id="myModal" class="modal1">
 
+<div id="myModal" class="modal1">
+{{result}}
     <!-- Modal content -->
     <div class="modal-content">
        <!-- <small><ng-transclude></ng-transclude></small>-->
         <span class="close" ng-click="hideMe()">&times;</span>
         <div class="list-group" >
-            
+            <div>{{showMe}}</div>
            <div ng-repeat="result in resultObject">
               <a href="#!/products/{{result.id}}" class="list-group-item list-group-item-action flex-column align-items-start" ng-click="hideMe()">
                 <div class="d-flex w-100 justify-content-between">

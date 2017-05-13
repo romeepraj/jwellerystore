@@ -16,42 +16,8 @@
    <link rel="stylesheet" href="css/carousel.css">
 
 </head>
-<body ng-controller ="SrchCtrl">
-<div class="navbar-wrapper">
-      <div class="container"  >
-
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#!/main">JWELLERY STORE</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li ng-class="getClass('/main')"><a href="#!/main">Home</a></li>
-                <li><a href="#!/about" ng-class="getClass('/about')">About</a></li>
-                 <li><a href="#!/products" ng-class="getClass('/products')">Products</a></li>
-                <li><a href="#!/contact" ng-class="getClass('/contact')">Contact</a></li>
-                
-              </ul>
-                <div class="search-wrapper">
-                   
-                   <input type="text" placeholder="Search products..." ng-model="searchbox" id="searchbox" ng-keypress ="search()" ng-keydown="search()"><i class="fa fa-search srchicon" aria-hidden="true" ng-click ="search()"></i>
-                  
-                   
-                </div>
-            </div>
-          </div>
-        </nav>
-         
-       
-      </div>
-    </div>
+<body>
+<div ui-view="header"></div>
    
  
 
@@ -59,22 +25,12 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-    <search-result result-object= "results" hide-me = "hideMe()"  ng-show="showMe"></search-result>
 
-  <div ng-view></div>
+  
+<div ui-view="content"></div>
 
- <footer>
-    <div class="container">
-    <div class="col-xs-6">
-    © 2016 Jwellery Store. All Rights Reserved.
-    </div>
-    <div class="col-xs-6 pull-right text-right">
-    <a href="#">Privacy</a> | <a href="#">Terms</a>
-    </div>
-        
-     
-    </div>
-</footer>
+ 
+<div ui-view="footer"></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -83,12 +39,13 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap-slider.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
   <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-
+ 
   
   <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoFyLKF9AmaL2Rbr-Z4YCLnwvxvQoMFB8&callback=initMap"
   type="text/javascript"></script>-->

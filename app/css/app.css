@@ -211,6 +211,14 @@ footer a{
     margin-top: 30px;
    
 }
+.list-row{
+  border-bottom:1px solid #ccc;
+  padding-top:23px;
+}
+.list-img{
+  width:150px;
+  height:auto;
+}
 .list-group-item{
     cursor: pointer;
 }
