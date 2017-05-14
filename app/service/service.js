@@ -15,10 +15,12 @@ angular.module('myApp.service', [])
     return { getProducts: getProducts };*/
 
    this.getProducts = function(callback){
-         $http.get('/json/products.json').then(function(response){
+         $http.get('/json/products.json',{ cache: true }).then(function(response){
                  callback(response.data);
                 }, function(error){ console.log('error')});
    }
+
+
    this.filterProducts = function(f, value, callback){
    
      this.getProducts(function(response){
@@ -55,7 +57,7 @@ angular.module('myApp.service', [])
 
     categories.getCategories = function(callback){
            
-                $http.get('/json/categories.json').then(function(response){
+                $http.get('/json/categories.json', { cache: true }).then(function(response){
                  callback(response.data);
                 }, function(error){ console.log('error')});
     }
