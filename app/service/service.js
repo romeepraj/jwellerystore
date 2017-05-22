@@ -16,6 +16,7 @@ angular.module('myApp.service', [])
 
    this.getProducts = function(callback){
          $http.get('/json/products.json',{ cache: true }).then(function(response){
+               
                  callback(response.data);
                 }, function(error){ console.log('error')});
    }

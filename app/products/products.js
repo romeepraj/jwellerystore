@@ -88,18 +88,46 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
  
 }])
 
+.directive("productResult", function(){
+    return {
+        templateUrl:'search/search.html',
+        replace:true,
+        //isolated scope
+        /*scope:{
+            productObject : "="
+           // hideMe: "&"
+       },*/
+        transclude:true,
+        //shared scope
+      //  scope:true,
+       //cloning transclude using callback
+        controller: function($scope, $element, $attrs, $transclude){
+          $transclude(function(transEL){
+           
+             $element.find('#price_value').append(transEL);
+          });
+         
+        }
+        
+    }
+})
 .controller('ProductsCtrl', ['$scope', 'productList', 'categoryTree', '$filter',  function($scope, productList, categoryTree, $filter) {
   //defaults
   $scope.selectedCategory = '';
   $scope.sort = 'new';
   //get cattree from service we have to pass callback function to make the request ashynchronous
   categoryTree.getCategories(function(response){
+
       $scope.categories = response;
   })
 
   
+
   productList.getProducts(function(response){
+
+   // console.log(response);
     $scope.products = response;
+
     $scope.max =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.max(a,b)});
     $scope.min =  $scope.products.map(function(product){return product.price;}).reduce(function(a,b){return Math.min(a,b)});
    
@@ -110,6 +138,7 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
         $scope.selectedCategory = '';
         productList.getProducts(function(response){
             $scope.products = response;
+
         });
         $scope.catName = null;
      }

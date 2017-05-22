@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 angular.module('myApp.search', ['ngRoute', 'ngMessages'])
 
@@ -13,4 +13,4 @@ angular.module('myApp.search', ['ngRoute', 'ngMessages'])
 .controller('SearchCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
    
     
-}]);
+}]);*/

@@ -1,24 +1,19 @@
-<!-- The Modal -->
 
-<div id="myModal" class="modal1">
-{{result}}
-    <!-- Modal content -->
-    <div class="modal-content">
-       <!-- <small><ng-transclude></ng-transclude></small>-->
-        <span class="close" ng-click="hideMe()">&times;</span>
-        <div class="list-group" >
+    
+
+<div  class="row list-row">
+  <div class="col-md-3 text-center">
+ 
+    <a href="#!/products/{{product.id}}"><img ng-src="images/{{product.images[0].name}}" class="img-responsive list-img"></a>
+  </div>
+  <div class="col-md-9">
+       <div class="product-desc">
+            <h5><a href="#!/products/{{product.id}}">{{product.name}}</a></h5>
+            <p>{{ product.description | words:30}}</p>
+            <div id="price_value"></div>
+          
            
-           <div ng-repeat="result in resultObject">
-              <a href="#!/products/{{result.id}}" class="list-group-item list-group-item-action flex-column align-items-start" ng-click="hideMe()">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">{{result.name}}</h5>
-                 </div>
-                <p class="mb-1">{{result.description}}</p>
-
-              </a>
-           </div>
-            <div ng-if="resultObject.length <= 0">No products found. Try using different name.</div>
         </div>
     </div>
-</div>
-
+  </div>    
+</div>      

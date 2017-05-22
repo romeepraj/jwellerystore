@@ -7,7 +7,7 @@ angular.module('myApp', [
   'myApp.about',
   'myApp.products',
   'myApp.contact',
-  'myApp.search',
+  //'myApp.search',
   'myApp.service',
   'myApp.version'
 ]).
@@ -42,32 +42,51 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
         templateUrl:'search/search.html',
         replace:true,
         scope:{
-            resultObject : "=",
-            hideMe: "&"
+            resultObject : "="
+           
         },
-        transclude:true
+        scope:true,
+        controller: function($scope, $element, $attrs){
+
+         // console.log($scope.products);
+        }
         
     }
-}).
-
-controller('SrchCtrl', ['$scope', '$filter', 'productList', function($scope, $filter, productList){
-  
+})
+.filter('words', function () {
+  return function (input, words) {
+    if (isNaN(words)) {
+      return input;
+    }
+    if (words <= 0) {
+      return '';
+    }
+    if (input) {
+      var inputWords = input.split(/\s+/);
+      if (inputWords.length > words) {
+        input = inputWords.slice(0, words).join(' ') + '\u2026';
+      }
+    }
+    return input;
+  };
+})
+.controller('SrchCtrl', ['$scope', '$filter', 'productList', function($scope, $filter, productList){
    $scope.showMe = false;
    $scope.search = function(){
  
        if ($scope.searchbox) {
            $scope.showMe = true;
             productList.getProducts(function(response){
-                $scope.results = $filter('filter')(response, { name: $scope.searchbox});
+                $scope.products = $filter('filter')(response, { name: $scope.searchbox});
                
             })
        }
     
    }
    $scope.hideMe = function(){
-       $scope.showMe = false;
-       $scope.searchbox = '';
-   }
-   
-}]);
+               $scope.showMe = false;
+               $scope.searchbox = '';
+  }
 
+}]);
+//ra-5823acf016c589db angular.element($0).scope()

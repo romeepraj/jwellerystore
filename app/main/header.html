@@ -1,3 +1,4 @@
+<div class="header-wrapper" ng-controller="SrchCtrl">
 <div class="navbar-wrapper">
       <div class="container"  >
 
@@ -34,4 +35,24 @@
        
       </div>
     </div>
-    <search-result result-object= "results" hide-me = "hideMe()"  ng-show="showMe"></search-result>
+
+    
+    <!--<search-result result-object= "results" hide-me = "hideMe()"  ng-show="showMe"></search-result>-->
+    
+
+    <div id="myModal" class="modal1" ng-if='showMe'>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+       <!-- <small><ng-transclude></ng-transclude></small>-->
+        <span class="close" ng-click="hideMe()">&times;</span>
+        <div class="list-group" >
+       
+             <search-result ng-repeat="product in products"></search-result>
+            
+            <div ng-if="products.length <= 0">No products found. Try using different name.</div>
+        </div>
+    </div>
+</div>
+
+    </div>
