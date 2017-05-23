@@ -216,7 +216,7 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
        
     }
 }])
-.controller('ProductsDetailCtrl', ['$scope', '$stateParams', '$filter', 'productList', '$location', 'productReview', function($scope, $stateParams, $filter, productList, $location, productReview) {
+.controller('ProductsDetailCtrl', ['$scope', '$stateParams', '$filter', 'productList', '$location', 'productReview', '$http',  function($scope, $stateParams, $filter, productList, $location, productReview, $http) {
    
   
 
@@ -235,4 +235,9 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
       $location.path(url);
 
     };
+    $http.get('/json/reviews.json').then(function(response){
+
+                     $scope.reviews =   $filter('filter')(response.data, { productid: productId });
+                    
+                    });
 }]);

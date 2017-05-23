@@ -1,0 +1,44 @@
+[
+	{
+		"id":1,
+		"productid":5,
+		"fullname": "Madhuri Latha",
+        "review":"Very Beautiful Piece. I loved it. I wear it in the party and everybody just asked me where you bought it."
+		
+	},
+    {  
+    	"id":2,
+		"productid":5,
+		"fullname": "Romee Prajapati",
+        "review":"Very Beautiful Piece. I loved it"
+		
+	},
+    {
+		"id":3,
+		"productid":2,
+		"fullname": "Romee Prajapati",
+        "review":"Very Beautiful Piece. I loved it"
+		
+	},
+    {
+		"id":4,
+		"productid":1,
+		"fullname": "Soni Singh",
+        "review":"Very Beautiful Piece. I loved it"
+		
+	},
+	 {
+		"id":5,
+		"productid":1,
+		"fullname": "Moira Prajapati",
+        "review":"Very Beautiful Piece. I loved it"
+		
+	},
+    {
+		"id":6,
+		"productid":6,
+		"fullname": "Rumanisha Singh",
+        "review":"Very Beautiful Piece. Its awesome I'm loving it."
+		
+	}
+]
