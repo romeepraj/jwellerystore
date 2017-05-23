@@ -1,7 +1,22 @@
 'use strict';
 angular.module('myApp.service', [])
 //product service data pulling from json
+.service('productReview', [  function(){
+  var reviewList = [];
 
+  var addReview = function(newObj) {
+      reviewList.push(newObj);
+  };
+
+  var getReview = function(){
+      return reviewList;
+  };
+
+  return {
+    addReview: addReview,
+    getReview: getReview
+  };
+}])
 .service('productList', ['$http', '$filter',  function($http, $filter){
  /*var promise; 
  var getProducts = function() {

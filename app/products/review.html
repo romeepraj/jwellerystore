@@ -1,0 +1,28 @@
+<div id="banner" class="banner">
+  <img  src="images/jewelry-box-2093019_1280.jpg" alt="Third slide" class="img-responsive">
+  <div class="car-desc">
+    <h1>The treasure of your life</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
+  </div>
+</div>
+<div class="container mainwrapper">
+    <h1>Review Submission</h1>
+    <p>Thank you for submitting your review.</p>
+    <div class="row">
+    <div class="col-md-2">
+    	<div ng-repeat="item in items">
+    		<img ng-src="images/{{ item.images[0].name }}" class="thumbnail">
+    		<p>{{ item.name }}</p>
+    	</div>
+    </div>
+    <div class="col-md-10">
+    	<div ng-repeat="review in reviews">
+    	<p> <strong>Submitted by:</strong> {{ review.fullname }}</p>
+    	<p><strong>Your review:</strong> {{ review.review }}</p>
+    </div>
+
+    </div>
+    </div>
+    
+   
+</div>

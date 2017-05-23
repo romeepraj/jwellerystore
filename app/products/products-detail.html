@@ -33,14 +33,14 @@
   <input type="hidden" name="item_number" value="{{item.id}}">
   <input type="hidden" name="amount" value="{{item.price}}">
   
-  <input type="submit" name="submit" value="Buy"class="btn btn-primary">
+  <input type="submit" name="submit" value="Buy" class="btn btn-primary">
 
 </form>
 		</div>
 </div>
 <div class="row">
  <h3>Write Review</h3>   
- <form name="myForm">
+ <form name="myForm" ng-controller="ProductsDetailCtrl" ng-submit="submit()">
     <div class="form-group">
         <label for="fullname">Full Name</label>
         <input type="text" ng-model="fullname" name="fullname" id="fullname" required class="form-control" />

@@ -81,6 +81,18 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
             }
         }
  
+    })
+      .state('app.products.review', {
+        url: '/review/:productId',
+      
+       views: {
+            'content@': {
+                templateUrl: 'products/review.html',
+                controller:'ProductReviewCtrl'
+                      
+            }
+        }
+ 
     });
 
     
@@ -111,8 +123,21 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
         
     }
 })
+.controller('ProductReviewCtrl', ['$scope', 'productReview', 'productList', '$stateParams', function($scope, productReview, productList, $stateParams) {
+      $scope.reviews = productReview.getReview();
+      var productId = $stateParams.productId;
+      productList.filterProducts('id', productId, function(response){
+        $scope.items = response;
+        console.log($scope.items);
+        
+    });
+   
+}])
+
+
 .controller('ProductsCtrl', ['$scope', 'productList', 'categoryTree', '$filter',  function($scope, productList, categoryTree, $filter) {
   //defaults
+
   $scope.selectedCategory = '';
   $scope.sort = 'new';
   //get cattree from service we have to pass callback function to make the request ashynchronous
@@ -191,8 +216,10 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
        
     }
 }])
-.controller('ProductsDetailCtrl', ['$scope', '$stateParams', '$filter', 'productList', function($scope, $stateParams, $filter, productList) {
+.controller('ProductsDetailCtrl', ['$scope', '$stateParams', '$filter', 'productList', '$location', 'productReview', function($scope, $stateParams, $filter, productList, $location, productReview) {
    
+  
+
 	var productId = $stateParams.productId;
     productList.filterProducts('id', productId, function(response){
         $scope.items = response;
@@ -201,4 +228,11 @@ angular.module('myApp.products', ['ui.router', 'ngMessages'])
              $scope.mainImage = image.name;
 	      }
     });
+    $scope.submit = function() {
+       var currObj = { fullname: $scope.fullname , review: $scope.review };
+       productReview.addReview(currObj);
+       var url = 'products/review/'+ productId;
+      $location.path(url);
+
+    };
 }]);
